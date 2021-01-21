@@ -1,8 +1,14 @@
 
+/******************************************************************************
+ * V1.6
+ * Added MQTT Username and Password
+ * See MU and MW commands
+ ******************************************************************************/
+
 #include <Preferences.h>
 #include <WiFi.h>
 
-const char ver[] = {"1.0"};
+const char ver[] = {"1.6"};
 const char moduleID = 43;
 
 Preferences nvm;
@@ -47,6 +53,9 @@ uint AsciiPort;
 char MqttServer[BUFSIZE];
 char MqttID[BUFSIZE];
 uint MqttPort;
+char MqttUser[BUFSIZE];
+char MqttPasswd[BUFSIZE];
+char mqttpasswd2[BUFSIZE];
 char R1Topic[BUFSIZE];    // Relay topics
 char R2Topic[BUFSIZE];
 char R3Topic[BUFSIZE];
@@ -156,6 +165,9 @@ void wifi_connect( void )
   AsciiPort = nvm.getUInt("AsciiPort", 17123);
   nvm.getString("MqttServer", MqttServer, BUFSIZE - 1);
   nvm.getString("MqttID", MqttID, BUFSIZE - 1);
+  nvm.getString("MqttUser", MqttUser, BUFSIZE-1);
+  nvm.getString("MqttPasswd", MqttPasswd, BUFSIZE-1);
+  strcpy(mqttpasswd2, "********");
   MqttPort = nvm.getUInt("MqttPort", 0);            // 0 means do not connect, normally should be 1883
   nvm.getString("R1Topic", R1Topic, BUFSIZE - 1);
   nvm.getString("R2Topic", R2Topic, BUFSIZE - 1);

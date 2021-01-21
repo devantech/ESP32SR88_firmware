@@ -64,7 +64,7 @@ void mqttRelayAction(char state, int relay) {
 void reconnect() {
   if (WiFi.status() != WL_CONNECTED) return; //WIFI disconnected so don't attempt reconnect
   Serial.println("Attempting MQTT connection...");
-  if (MQTTclient.connect(MqttID)) {
+    if (MQTTclient.connect(MqttID,MqttUser,MqttPasswd)) {
     printState();
 
     // subscribe
